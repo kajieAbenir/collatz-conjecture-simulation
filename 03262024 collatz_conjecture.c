@@ -9,10 +9,13 @@
 // function prototypes. for program to be read later.
 
 void welcomeScreen();
-void operation (int loopAmt, int number);
-void afterLoopPrint(int lastNum, int loopNum);
+void operation (int number);
+void afterLoopPrint(int lastNum, int looNum);
 
 int main() {
+	// clears cmd screen in case of previous entries.
+	system("cls");
+	
 	// calls the main program.
 	welcomeScreen();
 	
@@ -21,16 +24,10 @@ int main() {
 }
 
 void welcomeScreen(){
-	// clears cmd screen in case of previous entries.
-	system("cls");
-	
 	printf("COLLATZ CONJECTURE SIMULATION PROGRAM\n");
-	printf("made by: BRENT KYRJEH ABENIR\n\n");
+	printf("made by: BRENT KYRJEH ABENIR\n");
 	
 	printf("\n---------------\n\n");
-	
-	// declare int for user-define result loop amt.
-	int loopAmt = 0;
 	
 	// declare starting number.
 	int number = 0;
@@ -40,17 +37,19 @@ void welcomeScreen(){
 	
 	if(number == 0){
 		return;
+	} else if(number < 0){
+		system("cls");
+		printf("ERROR! Value must not be negative.\nThe program will go wild XD\n");
+		printf("\n---------------\n\n");
+		welcomeScreen();
 	}
-	
-	printf("\nEnter max amount of results \n>>> ");
-	scanf("%d",&loopAmt);
 	
 	printf("\n---------------\n\n");
 	
-	operation(loopAmt, number);
+	operation(number);
 }
 
-void operation (int loopAmt, int number){
+void operation (int number){
 	// declare loop repititions.
 	int i = 0;
 	
@@ -59,7 +58,7 @@ void operation (int loopAmt, int number){
 	
 	int collatzLoop = 0;
 	
-	for(i = 0;i < loopAmt;i++){
+	for(i = 0;i < i+1;i++){
 		
 		// if the number is even...
 		if(number % 2 == 0){
@@ -102,24 +101,14 @@ void afterLoopPrint(int lastNum, int loopNum){
 	
 	printf("\n---------------\n\n");
 	
-	// failsafe check if the calculation was lacking.
-	
-	if(lastNum > 4){
-		// if program did not found the desired sequence, error message will appear.
-		printf("Error! Collatz Sequence not found!\n");
-	} else {
-		// else, prints out the starting number of Collatz Sequence.
-		// validation for loop number integrity (avoid 'glitch').
-		if(lastNum < 10){
-			printf("The 4-2-1 Collatz Sequence started at result #%d\n", loopNum-1);
-		} else{
-			printf("The 4-2-1 Collatz Sequence started at result #%d\n", loopNum-10);
-		}
-	}
+	printf("The 4-2-1 Collatz Sequence started at result #%d\n", loopNum-10);
 	
 	// waits for user's ENTER key.
 	printf("Press [Enter] to continue... ");
 	getch();
+	
+	// clears screen to make way of new entry.
+	system("cls");
 	
 	// loops the program back to start.
 	welcomeScreen();
